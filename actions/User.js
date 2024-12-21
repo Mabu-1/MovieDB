@@ -11,16 +11,27 @@ export const signupUser = async (formData) => {
   const password = formData.get("password");
   const agreeToTerms = formData.get("agreeToTerms") === "on";
 
-  await connectMongo();
-  await new User({
-    firstName,
-    lastName,
-    email,
-    password,
-    agreeToTerms,
-  }).save();
+  try {
+    await connectMongo();
 
-  redirect("/login");
+    const existingUser = await User.findOne({ email }).lean();
+    if (existingUser) {
+      return null;
+    }
+
+    await new User({
+      firstName,
+      lastName,
+      email,
+      password,
+      agreeToTerms,
+    }).save();
+
+    redirect("/login");
+  } catch (error) {
+    console.error("Signup error:", error);
+    return { message: "Error creating account!", success: false };
+  }
 };
 
 export async function performLogin(formData) {
