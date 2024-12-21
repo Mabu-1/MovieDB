@@ -137,6 +137,25 @@ async function getMovieResult(query) {
   }
 }
 
+async function getWatchlist(userEmail) {
+  if (!userEmail) return [];
+
+  try {
+    const response = await fetch(
+      `/api/watchlist?userEmail=${encodeURIComponent(userEmail)}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch watchlist");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching watchlist:", error);
+    return [];
+  }
+}
 export {
   getAllPopular,
   getAllTopRated,
@@ -146,4 +165,5 @@ export {
   getMovieResult,
   getRecommendations,
   getSearchResult,
+  getWatchlist,
 };

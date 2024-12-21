@@ -1,8 +1,13 @@
+"use client";
 import Link from "next/link";
 import Search from "../components/Search";
 import SignInOut from "../components/SignInOut";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Navbar() {
+  const { auth } = useAuth();
+  const email = auth?.email;
+
   return (
     <nav className="fixed w-full z-50 bg-gradient-to-b from-black to-transparent">
       <div className="container mx-auto px-4 py-6 flex justify-between items-center">
@@ -17,9 +22,18 @@ export default function Navbar() {
             <Link href="/compare" className="text-white hover:text-gray-300">
               Compare Movies
             </Link>
-            <Link href="/WatchList" className="text-white hover:text-gray-300">
-              Watch Later
-            </Link>
+            {email ? (
+              <Link
+                href="/watchlist"
+                className="text-white hover:text-gray-300"
+              >
+                Watch Later
+              </Link>
+            ) : (
+              <Link href="/login" className="text-white hover:text-gray-300">
+                Watch Later
+              </Link>
+            )}
           </div>
         </div>
 
