@@ -1,6 +1,6 @@
 async function getAllTrending() {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/trending`);
+    const response = await fetch(`/api/trending`);
     if (!response.ok) {
       throw new Error("Failed to fetch trending movies");
     }
@@ -13,7 +13,7 @@ async function getAllTrending() {
 }
 async function getAllPopular() {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/popular`);
+    const response = await fetch(`/api/popular`);
     if (!response.ok) {
       throw new Error("Failed to fetch trending movies");
     }
@@ -26,7 +26,7 @@ async function getAllPopular() {
 }
 async function getAllTopRated() {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/topRated`);
+    const response = await fetch(`/api/topRated`);
     if (!response.ok) {
       throw new Error("Failed to fetch trending movies");
     }
@@ -39,9 +39,7 @@ async function getAllTopRated() {
 }
 async function getMovieDetails(movieID) {
   try {
-    const response = await fetch(
-      `${process.env.BASE_URL}/api/movie/${movieID}`
-    );
+    const response = await fetch(`/api/movie/${movieID}`);
     if (!response.ok) {
       if (response.status === 404) {
         return null;
@@ -59,9 +57,7 @@ async function getMovieDetails(movieID) {
 }
 async function getCastDetails(movieID) {
   try {
-    const response = await fetch(
-      `${process.env.BASE_URL}/api/movie/${movieID}/credits`
-    );
+    const response = await fetch(`/api/movie/${movieID}/credits`);
     if (!response.ok) {
       if (response.status === 404) {
         return null;
@@ -77,12 +73,9 @@ async function getCastDetails(movieID) {
 }
 async function getRecommendations(movieID) {
   try {
-    const response = await fetch(
-      `${process.env.BASE_URL}/api/movie/${movieID}/recommendations`,
-      {
-        cache: "no-store", // This is the React Server Component way to disable caching
-      }
-    );
+    const response = await fetch(`/api/movie/${movieID}/recommendations`, {
+      cache: "no-store", // This is the React Server Component way to disable caching
+    });
     if (!response.ok) {
       throw new Error("Failed to fetch movie details");
     }
@@ -98,9 +91,7 @@ async function getSearchResult(query) {
 
   try {
     const response = await fetch(
-      `${process.env.BASE_URL}/api/search/movie?query=${encodeURIComponent(
-        query
-      )}`
+      `/api/search/movie?query=${encodeURIComponent(query)}`
     );
 
     if (!response.ok) {
