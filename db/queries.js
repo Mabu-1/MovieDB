@@ -57,6 +57,7 @@ async function getMovieDetails(movieID) {
     return [];
   }
 }
+
 async function getCastDetails(movieID) {
   try {
     const response = await fetch(
