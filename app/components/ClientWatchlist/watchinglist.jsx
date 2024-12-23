@@ -3,9 +3,9 @@ import { getWatchList } from "@/actions/User";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { MovieCardSkeletonGrid } from "./MovieCardSkeleton";
+import { MovieCardSkeletonGrid } from "../MovieCardSkeleton";
 
-export default function WatchLIst({ email }) {
+export default function Watchinglist({ email }) {
   const [watchlistMovies, setWatchlistMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

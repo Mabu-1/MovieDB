@@ -1,6 +1,6 @@
 "use client";
-import { useAuth } from "../hooks/useAuth";
-import WatchLIst from "./WatchList";
+import { useAuth } from "../../hooks/useAuth";
+import WatchLIst from "./watchinglist";
 
 export default function ClientWatchList() {
   const { auth } = useAuth();
