@@ -1,4 +1,5 @@
 "use server";
+
 import connectMongo from "@/dbConnect/connectMongo";
 import User from "@/models/User";
 import Watchlist from "@/models/WatchList";
@@ -14,12 +15,10 @@ export const signupUser = async (formData) => {
 
   try {
     await connectMongo();
-
     const existingUser = await User.findOne({ email }).lean();
     if (existingUser) {
       return null;
     }
-
     await new User({
       firstName,
       lastName,
@@ -27,7 +26,6 @@ export const signupUser = async (formData) => {
       password,
       agreeToTerms,
     }).save();
-
     redirect("/login");
   } catch (error) {
     console.error("Signup error:", error);
@@ -56,32 +54,28 @@ export async function addToWatchList(
   if (!userEmail) return null;
   try {
     await connectMongo();
-
-    const existing = await Watchlist.findOne({ userEmail, movieId }).lean();
-    if (existing) {
-      return JSON.parse(JSON.stringify(existing));
-    }
-
     const watchListEntry = {
       userEmail,
       movieId,
       movieTitle,
       posterPath,
     };
-
     const result = await Watchlist.create(watchListEntry);
     return JSON.parse(JSON.stringify(result));
   } catch (error) {
+    if (error.code === 11000) {
+      return watchListEntry; // Return plain object for duplicate entries
+    }
     console.error("Error adding to watchlist:", error);
     return null;
   }
 }
+
 export async function removeFromWatchList(userEmail, movieId) {
   if (!userEmail) return false;
-
   try {
     await connectMongo();
-    const result = await WatchList.deleteOne({ userEmail, movieId });
+    const result = await Watchlist.deleteOne({ userEmail, movieId });
     return result.deletedCount > 0;
   } catch (error) {
     console.error("Error removing from watchlist:", error);
@@ -91,10 +85,9 @@ export async function removeFromWatchList(userEmail, movieId) {
 
 export async function checkInWatchList(userEmail, movieId) {
   if (!userEmail) return false;
-
   try {
     await connectMongo();
-    const count = await WatchList.countDocuments({ userEmail, movieId });
+    const count = await Watchlist.countDocuments({ userEmail, movieId });
     return count > 0;
   } catch (error) {
     console.error("Error checking watchlist:", error);
@@ -104,11 +97,12 @@ export async function checkInWatchList(userEmail, movieId) {
 
 export async function getWatchList(userEmail) {
   if (!userEmail) return [];
-
   try {
     await connectMongo();
-    const watchList = await WatchList.find({ userEmail }).lean();
-    return JSON.parse(JSON.stringify(watchList));
+    console.log("Searching for email:", userEmail);
+    const watchlist = await Watchlist.find({ userEmail }).lean();
+    console.log("Found watchlist:", watchlist);
+    return JSON.parse(JSON.stringify(watchlist));
   } catch (error) {
     console.error("Error fetching watchlist:", error);
     return [];

@@ -5,7 +5,6 @@ export default function WatchlistPage() {
   return (
     <>
       <Navbar />
-
       <ClientWatchList />
     </>
   );
