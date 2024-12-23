@@ -17,8 +17,10 @@ export default async function MoviePage({ params }) {
   return (
     <>
       <Navbar />
-      <MovieDetailsPage id={id} />
-      <MoreLikeThis id={id} />
+      <div className="flex flex-col gap-8">
+        <MovieDetailsPage id={id} />
+        <MoreLikeThis id={id} />
+      </div>
     </>
   );
 }
