@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const WatchListSchema = new mongoose.Schema(
   {
     userEmail: {
@@ -21,13 +20,10 @@ const WatchListSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "Watchlist",
+    collection: "watchlist",
   }
 );
-
 WatchListSchema.index({ userEmail: 1, movieId: 1 }, { unique: true });
-
 const Watchlist =
-  mongoose.models.Watchlist || mongoose.model("Watchlist", WatchListSchema);
-
+  mongoose.models.watchlist || mongoose.model("watchlist", WatchListSchema);
 export default Watchlist;

@@ -1,7 +1,9 @@
-// app/api/watchlist/route.js
 import connectMongo from "@/dbConnect/connectMongo";
 import WatchList from "@/models/WatchList";
 import { NextResponse } from "next/server";
+
+// Add dynamic configuration
+export const dynamic = "force-dynamic";
 
 export async function GET(request) {
   try {
@@ -18,7 +20,6 @@ export async function GET(request) {
 
     await connectMongo();
     const watchList = await WatchList.find({ userEmail }).lean();
-
     return NextResponse.json(watchList);
   } catch (error) {
     console.error("Error fetching watchlist:", error);

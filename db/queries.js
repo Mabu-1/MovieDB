@@ -157,6 +157,7 @@ async function getWatchlist(userEmail) {
     return [];
   }
 }
+
 export {
   getAllPopular,
   getAllTopRated,

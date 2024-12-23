@@ -1,7 +1,8 @@
 "use server";
 import connectMongo from "@/dbConnect/connectMongo";
 import User from "@/models/User";
-import WatchList from "@/models/WatchList";
+import Watchlist from "@/models/WatchList";
+
 import { redirect } from "next/navigation";
 
 export const signupUser = async (formData) => {
@@ -53,9 +54,14 @@ export async function addToWatchList(
   posterPath
 ) {
   if (!userEmail) return null;
-
   try {
     await connectMongo();
+
+    // First check if entry already exists
+    const existing = await Watchlist.findOne({ userEmail, movieId }).lean();
+    if (existing) {
+      return JSON.parse(JSON.stringify(existing)); // Return existing entry
+    }
 
     const watchListEntry = {
       userEmail,
@@ -64,17 +70,13 @@ export async function addToWatchList(
       posterPath,
     };
 
-    const result = await WatchList.create(watchListEntry);
+    const result = await Watchlist.create(watchListEntry);
     return JSON.parse(JSON.stringify(result));
   } catch (error) {
-    if (error.code === 11000) {
-      return watchListEntry; // Return plain object for duplicate entries
-    }
     console.error("Error adding to watchlist:", error);
     return null;
   }
 }
-
 export async function removeFromWatchList(userEmail, movieId) {
   if (!userEmail) return false;
 

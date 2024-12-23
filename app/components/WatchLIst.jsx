@@ -1,7 +1,6 @@
 import { getWatchlist } from "@/db/queries";
 import Image from "next/image";
 import Link from "next/link";
-
 export default async function WatchLIst({ email }) {
   const watchlistMovies = await getWatchlist(email);
   if (watchlistMovies.length === 0) {
@@ -22,16 +21,15 @@ export default async function WatchLIst({ email }) {
     );
   }
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">My Watchlist</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div className="container mx-auto px-4 py-8 ">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 ">
         {watchlistMovies.map((movie) => (
           <Link
             key={movie.movieId}
             href={`/movie/${movie.movieId}`}
             className="bg-zinc-900 rounded-lg overflow-hidden hover:scale-105 transition-transform"
           >
-            <div className="relative w-full aspect-[2/3]">
+            <div className="relative w-full aspect-[2/3] ">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie.posterPath}`}
                 alt={movie.movieTitle}
