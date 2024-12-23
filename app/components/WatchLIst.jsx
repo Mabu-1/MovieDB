@@ -1,4 +1,3 @@
-// components/WatchList.jsx
 "use client";
 import { getWatchList } from "@/actions/User";
 import Image from "next/image";
@@ -6,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MovieCardSkeletonGrid } from "./MovieCardSkeleton";
 
-export default function WatchList({ email }) {
+export default function WatchLIst({ email }) {
   const [watchlistMovies, setWatchlistMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
