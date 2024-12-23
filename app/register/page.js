@@ -3,6 +3,21 @@ import { signupUser } from "@/actions/User";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useFormStatus } from "react-dom";
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      type="submit"
+      className="w-full bg-moviedb-red text-white py-3 rounded hover:bg-red-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+      disabled={pending}
+    >
+      {pending ? "Signing Up..." : "Sign Up"}
+    </button>
+  );
+}
 
 export default function SignupPage() {
   const router = useRouter();
@@ -101,12 +116,7 @@ export default function SignupPage() {
                 I agree to the Terms of Service and Privacy Policy
               </label>
             </div>
-            <button
-              type="submit"
-              className="w-full bg-moviedb-red text-white py-3 rounded hover:bg-red-700 transition duration-300"
-            >
-              Sign Up
-            </button>
+            <SubmitButton />
           </form>
           <div className="mt-6 text-moviedb-gray">
             Already have an account?{" "}

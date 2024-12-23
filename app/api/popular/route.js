@@ -5,7 +5,6 @@ export async function GET(request) {
     const url = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_API_KEY}`;
     const response = await axios.get(url);
 
-    N;
     return new Response(JSON.stringify(response.data), {
       headers: { "Content-Type": "application/json" },
     });

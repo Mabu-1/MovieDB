@@ -13,14 +13,14 @@ async function getAllTrending() {
 }
 async function getAllPopular() {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/popular`);
+    const response = await fetch(`${process.env.BASE_URL}/api/movie/popular`);
     if (!response.ok) {
-      throw new Error("Failed to fetch trending movies");
+      throw new Error("Failed to fetch popular movies");
     }
     const data = await response.json();
     return data.results;
   } catch (error) {
-    console.error("Error fetching trending movies:", error);
+    console.error("Error fetching popular movies:", error);
     return [];
   }
 }
@@ -28,12 +28,12 @@ async function getAllTopRated() {
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/topRated`);
     if (!response.ok) {
-      throw new Error("Failed to fetch trending movies");
+      throw new Error("Failed to fetch rated  movies");
     }
     const data = await response.json();
     return data.results;
   } catch (error) {
-    console.error("Error fetching trending movies:", error);
+    console.error("Error fetching rated movies:", error);
     return [];
   }
 }

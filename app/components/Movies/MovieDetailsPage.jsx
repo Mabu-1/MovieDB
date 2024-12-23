@@ -1,5 +1,5 @@
 import { getCastDetails, getMovieDetails } from "@/db/queries";
-import Head from "next/head";
+
 import Image from "next/image";
 import Link from "next/link";
 import WatchLaterButton from "../WatchLaterButton";
@@ -11,25 +11,23 @@ export default async function MovieDetailsPage({ id }) {
 
   return (
     <>
-      <Head>
-        <title>{movie.title} - Movie Details</title>
-        <meta name="description" content={movie.overview} />
-        <meta property="og:title" content={movie.title} />
-        <meta property="og:description" content={movie.overview} />
-        <meta
-          property="og:image"
-          content={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-        />
-        <meta property="og:url" content={movie.homepage} />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={movie.title} />
-        <meta name="twitter:description" content={movie.overview} />
-        <meta
-          name="twitter:image"
-          content={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-        />
-      </Head>
+      <title>{movie.title} - Movie Details</title>
+      <meta name="description" content={movie.overview} />
+      <meta property="og:title" content={movie.title} />
+      <meta property="og:description" content={movie.overview} />
+      <meta
+        property="og:image"
+        content={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+      />
+      <meta property="og:url" content={movie.homepage} />
+      <meta property="og:type" content="website" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={movie.title} />
+      <meta name="twitter:description" content={movie.overview} />
+      <meta
+        name="twitter:image"
+        content={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+      />
 
       <div id="movieDetails" className="min-h-screen pt-20 mb-8">
         <div className="relative h-screen">

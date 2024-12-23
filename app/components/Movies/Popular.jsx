@@ -7,7 +7,7 @@ export default async function Popular() {
 
   return (
     <section className="mb-8">
-      <h2 className="text-2xl font-bold mb-4">Popular on MOVIE DB</h2>
+      <h2 className="text-2xl font-bold mb-4">Popular</h2>
       <div id="trendingMovies" className="flex space-x-4 overflow-x-auto pb-4">
         {movies.map((movie) => (
           <div
