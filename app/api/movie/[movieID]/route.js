@@ -4,11 +4,9 @@ export async function GET(request, { params }) {
   const movieId = params.movieID;
 
   try {
-    // Fetch trending movies from TMDB API
     const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.TMDB_API_KEY}`;
     const response = await axios.get(url);
 
-    // Return the movie data as JSON
     return new Response(JSON.stringify(response.data), {
       headers: { "Content-Type": "application/json" },
     });

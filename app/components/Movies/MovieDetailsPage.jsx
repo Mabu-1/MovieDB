@@ -87,7 +87,6 @@ export default async function MovieDetailsPage({ id }) {
                   </div>
                 </div>
 
-                {/* Cast Section */}
                 <div className="mb-6">
                   <h3 className="text-gray-400 mb-2">Cast</h3>
                   <div className="flex flex-wrap gap-4">

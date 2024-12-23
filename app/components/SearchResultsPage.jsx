@@ -10,14 +10,13 @@ export default async function SearchResultsPage({ query }) {
     <>
       <Navbar />
       <main className="container mx-auto px-4 pt-24 pb-8">
-        {/* Search Stats */}
         <div className="mb-6">
           <h1 className="text-2xl font-bold">
             Search Results for &quot;{query}&quot;
           </h1>
           <p className="text-gray-400">Found {results.length} results</p>
         </div>
-        {/* Movie Results Grid */}
+
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           {results.map(
             (movie) =>

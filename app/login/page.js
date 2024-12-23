@@ -12,7 +12,7 @@ const SignInPage = () => {
     const user = await performLogin(formData);
     if (user) {
       setAuth(user);
-      router.push("/"); // or wherever you want to redirect
+      router.push("/");
     } else {
       alert("Invalid credentials");
     }

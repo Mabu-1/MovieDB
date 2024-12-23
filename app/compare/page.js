@@ -1,4 +1,3 @@
-// app/compare/page.jsx
 import MovieCompareContainer from "../components/MovieCompareContainer";
 import Navbar from "../Navbar/Navbar";
 

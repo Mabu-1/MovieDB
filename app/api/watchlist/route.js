@@ -2,12 +2,10 @@ import connectMongo from "@/dbConnect/connectMongo";
 import WatchList from "@/models/WatchList";
 import { NextResponse } from "next/server";
 
-// Add dynamic configuration
 export const dynamic = "force-dynamic";
 
 export async function GET(request) {
   try {
-    // Get userEmail from query parameters
     const { searchParams } = new URL(request.url);
     const userEmail = searchParams.get("userEmail");
 

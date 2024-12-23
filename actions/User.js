@@ -57,10 +57,9 @@ export async function addToWatchList(
   try {
     await connectMongo();
 
-    // First check if entry already exists
     const existing = await Watchlist.findOne({ userEmail, movieId }).lean();
     if (existing) {
-      return JSON.parse(JSON.stringify(existing)); // Return existing entry
+      return JSON.parse(JSON.stringify(existing));
     }
 
     const watchListEntry = {
